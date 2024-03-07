@@ -413,47 +413,60 @@ h2 {
           <li class="nav-item">
             <a class="nav-link {% if active_link == 'index' %} active{% endif %}" href="{% url 'index' %}">HOME</a>
           </li>
+          {%if user.is_authenticated%}
           <li class="nav-item">
             <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:chicken' %}">DEPORTES EXTREMOS</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'food:burger' %}">MAPA</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="{% url 'food:steak' %}">TOURS</a>
           </li>
+          {%else%}
+          <li class="nav-item">
+            <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:login' %}">LOGGEATE PARA VER LOS VIAJES</a>
+          </li>
+          {%endif%}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'food:burger' %}">MAPA</a>
+          </li>
+          
           <li class="nav-item">
             <a class="nav-link" href="{% url 'food:drink' %}">UBICACIONES</a>
           </li>
+    
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'food:pizza' %}">PERFIL</a>
+            <a class="nav-link {% if active_link == 'pizza' %} active{% endif %}" href="{% url 'food:pizza' %}">PERFIL</a>
           </li>
-          {% if user.is_authenticated %}
+           {% if user.is_authenticated %}
+            <li class="nav-item">
+                <span class="navbar-text">Bienvenido {{ user.username }}</span>
+            </li>
+            {% endif %}
           <li class="nav-item">
-            <span class="navbar-text">Bienvenido {{ user.username }}</span>
-          </li><li class="nav-item">
             <a href="{% url 'food:ver_carrito_y_pagar' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
                 <img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/>
                 
             </a>
           </li>
+          {% if user.is_authenticated %}
           <li class="nav-item">
             <a href="{% url 'food:logout' %}" class="nav-link">
-              <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
-              LogOut
+                <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+                LogOut
             </a>
           </li>
+    
+            <ul>
+         
           {% else %}
           <li class="nav-item">
             <a href="{% url 'food:login' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
-              <img class="bg-light rounded" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
-              LogIn
+                <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+                LogIn
             </a>
-          </li>
-          <li class="nav-item">
+          </li> <li class="nav-item">
             <a href="{% url 'food:signup' %}" class="nav-link {% if active_link == 'signup' %}active {% endif %}">
-              <img class="bg-light rounded" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
-              Create account
+                <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+                Create account
             </a>
           </li>
           {% endif %}
