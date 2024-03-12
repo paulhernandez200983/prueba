@@ -25,18 +25,24 @@
     {% load humanize %}
     
     <style>
+
+      .fas {
+        font-weight: bold;
+        color: #ffe300;
+        border-color: black;
+      }
       .card {
-        border: 2px solid black; /* Agrega un borde negro de 2px a todas las cards */
+        border: 2px solid #b5b3b3;
+        display: inline-table;
     }
     
-      .card {
-        display: flex; /* Use flexbox to enable a horizontal layout */
-        background-color: #fff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        margin-bottom: 20px;
-        border-radius: 10px;
-    }
+    .card {
+      background-color: #fff; /* Set a light background color */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px; /* Optional: Add rounded corners */
+  }
     .rating {
       color: gold; /* Color de las estrellas llenas */
   }
@@ -67,7 +73,7 @@
     }
         body {
           
-            font-family: "Lucida Console", "Courier New", monospace;
+          font-family: "Centra No2", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
         a{
           color: #e9d086;
@@ -83,9 +89,17 @@
         }
         .btn-info {
           color: #fff;
-          background-color: #e9d086;
-          border-color: #908a31;
-        }
+           background-color: #0fd28a;
+          border-color: #80ae90;
+          margin: 5px;
+  padding:10px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  font-size:18px;
+  line-height:32px;
+  
+  }
         .form-inline .btn-success:hover {
             background-color: #218838; /* Color de resaltado al pasar el ratón */
             border-color: #1e7e34;
@@ -189,13 +203,13 @@
           </li>
           <li class="nav-item">
             <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:chicken' %}">DEPORTES EXTREMOS</a>
+          </li> <li class="nav-item">
+            <a class="nav-link" href="{% url 'food:steak' %}">TOURS</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'food:burger' %}">MAPA</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'food:steak' %}">TOURS</a>
-          </li>
+         
           <li class="nav-item">
             <a class="nav-link" href="{% url 'food:drink' %}">UBICACIONES</a>
           </li>
@@ -209,9 +223,9 @@
             </li>
             {% endif %}
           <li class="nav-item">
-            <a href="{% url 'food:order' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
+            <a href="{% url 'food:ver_carrito_y_pagar' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
                 <img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/>
-                <span id="cart">0</span>
+                <span id="cart"></span>
             </a>
           </li>
           {% if user.is_authenticated %}
@@ -369,10 +383,10 @@
                   </label>
               </div>
               <br><br>
-              <div style='color:green;'>Puntos por esta compra: {{chicken.puntos}}</div>
+              <div style='color:green;'><b>Puntos por esta compra: {{chicken.puntos}}</b></div>
               <form action="{% url 'food:agregar_al_carrito' chicken.id %}" method="post">
                 {% csrf_token %}
-                <button class="btn-info mt-4"type="submit" onclick=showConfirmationModal();><img src="https://www.bogotraveltours.com/wp-content/uploads/2016/10/icono-encuentro.png" alt="heart" style="width: 20px; height: 20px;"> Agregar al carrito</button>
+                <button class="btn-info mt-4"type="submit" onclick=showConfirmationModal();><img src="https://www.bogotraveltours.com/wp-content/uploads/2016/10/icono-encuentro.png" alt="heart" style="width: 20px; height: 20px;"><b> Agregar al carrito</b></button>
             </form>
               
 
@@ -385,7 +399,7 @@
   </div>
 
   <div class="col-md-6 p-4 card">
-    <h2>Reseñas</h2><br><br><br>
+    <h2><b>Reseñas</b></h2><br>
     {% if reviews %}
         <ul>
         {% for review in reviews %}
@@ -407,7 +421,7 @@
                 <p>Comentario: {{ review.comment }}</p>
                 <p>Fecha: {{ review.date_added }}</p>
             
-            <br><br>
+            <img src="https://png.pngtree.com/png-clipart/20221003/original/pngtree-black-line-border-png-image_8653828.png" width="600px" height="300px"><br>
         {% endfor %}
         </ul>
     {% else %}
@@ -421,7 +435,7 @@
 
   <div class="col-md-6 p-4 card">
     <center>
-      <h3>AGREGA UNA REVIEW DE TU EXPERIENCIA</h3><BR><BR>
+      <h3><b>AGREGA UNA REVIEW DE TU EXPERIENCIA<b></h3><BR><BR>
   <form method="POST" action="{% url 'food:add_review' %}">
     {% csrf_token %}
     <input type="hidden" name="chicken_id" value="{{ chicken.id }}">
@@ -429,7 +443,7 @@
     <input type="number" name="rating" id="rating" min="1" max="5" required><br><br>
     <label for="comment">Comentario:</label>
     <textarea name="comment" id="comment" required></textarea><br>
-    <button class="btn-info mt-4" type="submit">Enviar reseña</button>
+    <button class="btn-info mt-4" type="submit"><b>Enviar reseña<b></button>
 </form>
 </div>
 

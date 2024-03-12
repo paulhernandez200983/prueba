@@ -27,16 +27,16 @@
   }
         body {
           
-            font-family: "Lucida Console", "Courier New", monospace;
+          font-family: "Centra No2", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
         a{
-          color: #e9d086;
+          color: #0e8056;
         }
         .bg-dark {
           background-color: #697276;
         }
       .navbar-light .navbar-nav .nav-link {
-        color: rgb(189, 172, 103);
+        color: #0e8056;
       }
         .form-inline .btn-success {
             background-color: #28a745;
@@ -85,7 +85,9 @@
             color: white;
             font-weight: bold;
         }
-    
+        .text-muted {
+          color: #f4fffbad;
+        }
         .navbar-nav {
             margin-right: 10px;
         }
@@ -131,7 +133,9 @@
           margin-bottom: 20px;
           border-radius: 10px; /* Optional: Add rounded corners */
       }
-    
+    input{
+      border: 3px solid #0fd28a;
+    }
         
         .picture {
           width: 100%;
@@ -176,8 +180,17 @@
       }
       .btn-info {
         color: #fff;
-        background-color: #e9d086;
-        border-color: #908a31;
+         background-color: #0fd28a;
+        border-color: #80ae90;
+        margin: 5px;
+padding:10px;
+-webkit-border-radius: 50px;
+-moz-border-radius: 50px;
+border-radius: 50px;
+font-size:18px;
+line-height:32px;
+
+
       }
       .banner-content {
           z-index: 1;
@@ -191,6 +204,13 @@
       .banner p {
           margin-top: 10px;
           font-size: 1.2em;
+      }
+
+      .text-muted{
+        color:white !important;
+      }
+      .info{
+        color:white;
       }
 </style>
 </head>
@@ -233,9 +253,9 @@
         <li class="nav-item">
             <span class="navbar-text">Bienvenido {{ user.username }}</span>
         </li><li class="nav-item">
-        <a href="{% url 'food:order' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
+        <a href="{% url 'food:ver_carrito_y_pagar' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
             <img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/>
-            <span id="cart">0</span>
+            
         </a>
       </li>
         {% endif %}
@@ -270,9 +290,9 @@
   <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-5 rounded">
-        <div class="card bg-dark rounded text-light p-4 rounded">
-          <h3 class="text-center mb-4">CREAR USUARIO</h3>
-          <form method="POST">
+        <div class="card bg-dark rounded text-light p-4 rounded" style="border: 3px solid #0fd28a;">
+          <h3 class="text-center mb-4 " style=" color:#0fd28a"><b>CREAR USUARIO<b></h3>
+          <form method="POST" >
             <center>
             {% csrf_token %}
             {% for field in form %}
@@ -280,7 +300,8 @@
                 <label>{{ field.label_tag }}</label><br>
                 {{ field }}
                 {% if field.help_text %}
-                  <small class="form-text text-muted">{{ field.help_text }}</small>
+                  <small class="form-text text-muted inf" style="
+                    color: #f4fffbad;">{{ field.help_text }}</small>
                 {% endif %}
               </div>
             {% endfor %}

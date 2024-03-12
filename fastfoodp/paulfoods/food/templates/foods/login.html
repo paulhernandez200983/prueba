@@ -34,14 +34,15 @@
   }
         body {
           
-            font-family: "Lucida Console", "Courier New", monospace;
+          font-family: "Centra No2", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+          
         }
         a{
           color: #e9d086;
         }
       
       .navbar-light .navbar-nav .nav-link {
-        color: rgb(189, 172, 103);
+        color: #0e8056;
       }
         .form-inline .btn-success {
             background-color: #28a745;
@@ -50,8 +51,17 @@
         }
         .btn-info {
           color: #fff;
-          background-color: #e9d086;
-          border-color: #908a31;
+           background-color: #0fd28a;
+          border-color: #80ae90;
+          margin: 5px;
+  padding:10px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  font-size:18px;
+  line-height:32px;
+  
+  
         }
         .form-inline .btn-success:hover {
             background-color: #218838; /* Color de resaltado al pasar el ratón */
@@ -193,7 +203,9 @@
           margin-top: 10px;
           font-size: 1.2em;
       }
-
+      h3{
+        font-weight: bold;
+      }
 
     </style>
     </head>
@@ -306,18 +318,19 @@
          <div class="container-fluid p-5">
             <div class="row">
                 <div class="col-md-4"></div>
-                <div class="col-md-4 rounded p-4 bg-dark text-light text-center">
-                    <h3 >Ingresa a tu cuenta </h3><br>
+                <div style="border: 3px solid #0fd28a;" class="col-md-4 rounded p-4 bg-dark text-light text-center">
+                    <h3 style="color: #0fd28a;" >Ingresa a tu cuenta </h3><br>
                     <form method="POST" >
                        {% csrf_token %}
                     
                        <div class="form-group">
-                          <input type="text" name="username" placeholder="Username">
-
+                       
+                          <input style="border: 3px solid #0fd28a;" type="text" name="username" placeholder="Username">
+ <b>
                    
-                       </div>
+                        </b></div>
                        <div class="form-group">
-                        <input type="password" name="password" placeholder="********">
+                        <input style="border: 3px solid #0fd28a;"type="password" name="password" placeholder="********">
                         
                  
                      </div>
@@ -325,7 +338,7 @@
                             
                         
                         
-                        <button type="submit" class="btn-info">Login</button>
+                        <button style="font-weight: bold;" type="submit" class="btn-info">Acceder</button>
                         
                         {% if messages %}
                         <ul class="pt-2 text-center">

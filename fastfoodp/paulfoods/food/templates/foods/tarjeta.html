@@ -30,29 +30,39 @@
   padding: 10px; /* Añade un relleno alrededor del texto */
   background-color: rgba(0, 0, 0, 0.57); /* Fondo semitransparente, puedes ajustar el color y la opacidad según sea necesario */
 }
+.btn-info {
+  color: #fff;
+   background-color: #0fd28a;
+  border-color: #80ae90;
+  margin: 5px;
+padding:10px;
+-webkit-border-radius: 50px;
+-moz-border-radius: 50px;
+border-radius: 50px;
+font-size:18px;
+line-height:32px;
+
+
+}
     body {
       
-        font-family: "Lucida Console", "Courier New", monospace;
+      font-family: "Centra No2", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
     a{
-      color: #e9d086;
+      color: #0e8056;
     }
     .bg-dark {
       background-color: #697276;
     }
   .navbar-light .navbar-nav .nav-link {
-    color: rgb(189, 172, 103);
+    color: #0e8056;
   }
     .form-inline .btn-success {
         background-color: #28a745;
         border-color: #28a745;
         color: white;
     }
-    .btn-info {
-      color: #fff;
-      background-color: #e9d086;
-      border-color: #908a31;
-    }
+    
     .form-inline .btn-success:hover {
         background-color: #218838; /* Color de resaltado al pasar el ratón */
         border-color: #1e7e34;
@@ -179,11 +189,7 @@ cursor: pointer;
       align-items: center;
       justify-content: center;
   }
-  .btn-info {
-    color: #fff;
-    background-color: #e9d086;
-    border-color: #908a31;
-  }
+  
   .banner-content {
       z-index: 1;
   }
@@ -214,11 +220,11 @@ cursor: pointer;
       <li class="nav-item">
         <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:chicken' %}">DEPORTES EXTREMOS</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'food:burger' %}">MAPA</a>
-      </li>
+     
       <li class="nav-item">
         <a class="nav-link" href="{% url 'food:steak' %}">TOURS</a>
+      </li> <li class="nav-item">
+        <a class="nav-link" href="{% url 'food:burger' %}">MAPA</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{% url 'food:drink' %}">RESEÑAS</a>
@@ -233,9 +239,9 @@ cursor: pointer;
         </li>
         {% endif %}
       <li class="nav-item">
-        <a href="{% url 'food:order' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
+        <a href="{% url 'food:ver_carrito_y_pagar' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
             <img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/>
-            <span id="cart">0</span>
+            
         </a>
       </li>
       {% if user.is_authenticated %}
@@ -264,8 +270,12 @@ cursor: pointer;
     </ul> 
     
   </nav><center>
-    <div class="container-fluid m-4">
-        <form id="formulario-tarjeta">
+    <br><br>
+    <div class="col-md-6 p-4 card">
+      <p><H3><B>PAGO CON TARJETA</B></H3></P>
+    <div class="container-fluid ">
+      <CENTER>
+        <form id="formulario-tarjeta" method='POST' action='enviar.php'>
             <div class="form-group">
                 <label for="numero_tarjeta">Número de tarjeta</label>
                 <input type="text" class="form-control" id="numero_tarjeta" required>
@@ -284,7 +294,7 @@ cursor: pointer;
                     <input type="text" class="form-control" id="codigo_seguridad" required>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary" id="boton-pagar">Pagar</button>
+            <button type="button" class="btn-info" id="boton-pagar"><b>Aceptar y pagar</b></button>
         </form>
         
         <script>
@@ -296,7 +306,7 @@ cursor: pointer;
                 if (formulario.checkValidity()) {
                     // Aquí puedes agregar tu lógica para procesar el pago
                     alert("Pago procesado correctamente");
-                    window.location.href = "{% url 'food:chicken' %}";
+                    window.location.href = "{% url 'food:succes' %}";
                 } else {
                     // Si el formulario no es válido, se mostrarán los mensajes de error automáticamente
                     formulario.reportValidity();
@@ -308,7 +318,7 @@ cursor: pointer;
         
   </div>
   
-  
+</div>
      
   
      

@@ -46,14 +46,14 @@
 }
     body {
       
-        font-family: "Lucida Console", "Courier New", monospace;
+      font-family: "Centra No2", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
     a{
-      color: #e9d086;
+      color: #0e8056;
     }
   
   .navbar-light .navbar-nav .nav-link {
-    color: rgb(189, 172, 103);
+    color: #0e8056;
   }
     .form-inline .btn-success {
         background-color: #28a745;
@@ -170,15 +170,15 @@
           </li>
           <li class="nav-item">
             <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:chicken' %}">DEPORTES EXTREMOS</a>
+          </li><li class="nav-item">
+            <a class="nav-link" href="{% url 'food:steak' %}">TOURS</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'food:burger' %}">MAPA</a>
           </li>
+          
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'food:steak' %}">TOURS</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'food:drink' %}">RESEÑAS</a>
+            <a class="nav-link" href="{% url 'food:drink' %}">UBICACIONES</a>
           </li>
     
           <li class="nav-item">
@@ -190,9 +190,9 @@
             </li>
             {% endif %}
           <li class="nav-item">
-            <a href="{% url 'food:order' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
+            <a href="{% url 'food:ver_carrito_y_pagar' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
                 <img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/>
-                <span id="cart">0</span>
+                
             </a>
           </li>
           {% if user.is_authenticated %}
@@ -224,14 +224,22 @@
         <BR>
           <div class="card">
             <h2><img srcset="https://cdn-icons-png.flaticon.com/512/2060/2060284.png 2x" alt="icon" loading="lazy" style="width: 60px; height: 60px; "/> Your trip has been scheduled!</h2>
-            <p>Thank you for choosing our service.</p><br>
+            <p>Thank you for choosing our service.</p><br><br><br><br><br>
             <p>If you need to make any changes, please contact us at:</p><br><br>
             <h3><img srcset="https://static.vecteezy.com/system/resources/previews/003/720/498/non_2x/phone-icon-telephone-icon-symbol-for-app-and-messenger-vector.jpg 2x" alt="icon" loading="lazy" style="width: 60px; height: 60px; "/>Phone number: 656 590 5814</h3>
             <p>We will also send you a confirmation email shortly.</p><br>
         </div>
-        <div class="card">
-          <H2> <img srcset="https://cdn-icons-png.flaticon.com/512/5220/5220625.png 2x" alt="icon" loading="lazy" style="width: 60px; height: 60px; "/>YOUR ORDER </h2>
+        <div class="card" style="width: fit-content;">
+          <H2> <img srcset="https://cdn-icons-png.flaticon.com/512/5220/5220625.png 2x" alt="icon" loading="lazy" style="width: 60px; height: 60px; "/><b>YOUR ORDER </b></h2>
             <P>{{order}}<br></P>
+            <h2>Items Purchased:</h2>
+            <ul>
+                {% for item in items_carrito %}
+                    <li>{{ item.pollo.name }} - Quantity: {{ item.cantidad }}</li>
+                {% endfor %}
+            </ul>
+            
+            <p>Total Amount: {{ total_carrito }}</p>
         </DIV>
         
         <h2>{{msg}}</h2></center>

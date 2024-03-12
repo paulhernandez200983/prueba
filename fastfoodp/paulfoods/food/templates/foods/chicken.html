@@ -18,6 +18,21 @@
     {% load static %}
     <style>
       /* Estilos generales */
+      .fas {
+        font-weight: bold;
+        color: #ffe300;
+        border-color: black;
+      }
+      .texts {
+        position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(76, 70, 70, 0.7);
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+      }
       body {
         font-family: "Lucida Console", "Courier New", monospace;
         background-image: url('https://img.freepik.com/foto-gratis/concreto-texturado-blanco_125540-1826.jpg?w=996&t=st=1708584169~exp=1708584769~hmac=6802f37a96b71f7b953580787dab6c7cf1f21b681cf0d8a35082798e77006d33');
@@ -67,7 +82,8 @@
         text-align: center; /* Alineación del texto al centro */
     }
       .card {
-        border: 2px solid black; /* Agrega un borde negro de 2px a todas las cards */
+        border: 2px solid #b5b3b3; /* Agrega un borde negro de 2px a todas las cards */
+        display:inline-table;
     }
     .navbar-toggler {
       border-color: #17a2b8;
@@ -91,14 +107,14 @@
   }
         body {
           
-            font-family: "Lucida Console", "Courier New", monospace;
+          font-family: "Centra No2", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
         a{
-          color: #e9d086;
+          color: #0e8056;
         }
       
       .navbar-light .navbar-nav .nav-link {
-        color: rgb(189, 172, 103);
+        color: #0e8056;
       }
         .form-inline .btn-success {
             background-color: #28a745;
@@ -107,8 +123,17 @@
         }
         .btn-info {
           color: #fff;
-          background-color: #e9d086;
-          border-color: #908a31;
+           background-color: #0fd28a;
+          border-color: #80ae90;
+          margin: 5px;
+  padding:10px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  font-size:18px;
+  line-height:32px;
+  
+  
         }
         .form-inline .btn-success:hover {
             background-color: #218838; /* Color de resaltado al pasar el ratón */
@@ -203,15 +228,15 @@
             margin-bottom: 20px;
         }
         .BET{
-          border: 2px solid #908a31;; /* Borde amarillo */
+          border: 2px solid #00aa6c; /* Borde amarillo */
     background-color: transparent; /* Fondo transparente */
     color: inherit; /* Hereda el color de texto del contenedor padre */
     padding: 10px 20px; /* Ajusta el relleno según sea necesario */
     cursor: pointer;
         }
         .BET:hover {
-          background-color: #e9d086; /* Cambia el fondo al pasar el ratón */
-          color: black; /* Cambia el color del texto al pasar el ratón */
+          background-color: #00aa6c; /* Cambia el fondo al pasar el ratón */
+          color: WHITE; /* Cambia el color del texto al pasar el ratón */
       }
         .card {
           background-color: #fff; /* Set a light background color */
@@ -239,7 +264,7 @@
         }
     
         .carr {
-            font-family: "Lucida Console", "Courier New", monospace;
+            
         }
     
         .perr {
@@ -249,7 +274,7 @@
         .cartc {
           background-color: #bfac46;
             color: black;
-            font-family: "Lucida Console", "Courier New", monospace;
+            
         }
         .banner {
           position: relative;
@@ -309,13 +334,13 @@
             </li>
             <li class="nav-item">
               <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:chicken' %}">DEPORTES EXTREMOS</a>
+            </li><li class="nav-item">
+              <a class="nav-link" href="{% url 'food:steak' %}">TOURS</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'food:burger' %}">MAPA</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'food:steak' %}">TOURS</a>
-            </li>
+            
             <li class="nav-item">
               <a class="nav-link" href="{% url 'food:drink' %}">UBICACIONES</a>
             </li>
@@ -367,7 +392,7 @@
     <div class="container">
       <form class="form-inline">
           <input class="form-control mr-sm-2" type="text" placeholder="Buscar por nombre" id="searchInput">
-          <button class="btn btn-info my-2 my-sm-0" type="button" onclick="filterByName()"><img srcset="https://cdn.icon-icons.com/icons2/2066/PNG/512/search_icon_125165.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/> Buscar</button>
+          <button class="btn btn-info my-2 my-sm-0" type="button" onclick="filterByName()"><img srcset="https://cdn.icon-icons.com/icons2/2066/PNG/512/search_icon_125165.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/><b>Buscar</b></button>
       </form>
     </div>
 
@@ -384,22 +409,22 @@
           {% endfor %}
       </select>
       
-<button type="button" class="btn btn-info my-2 my-sm-0" onclick="filterByCategory()">Filtrar por Categoría</button>
+<button type="button" class="btn btn-info my-2 my-sm-0" onclick="filterByCategory()"><b>Filtrar por Categoría</b></button>
         <!-- Botón de búsqueda -->
         
       </form>
       <select class="form-control mr-sm-2" id="priceFilter">
-        <option value="ALL">Todos los precios</option>
+        <option value="ALL"><b>Todos los precios</b></option>
         <option value="ECONOMIC">Menor a $3000</option>
         <option value="PREMIUM">Mayor a $3000</option>
     </select>
-    <button type="button" class="btn btn-info my-2 my-sm-0" onclick="filterbyprice()">Filtrar por precio</button>
+    <button type="button" class="btn btn-info my-2 my-sm-0" onclick="filterbyprice()"><b>Filtrar por precio</b></button>
     <div class="container">
      
           <div class="container mt-2">
-            <button type="button" class=" BET btn btn-info" onclick="filterByTerrestrial('{{chicken.catg}}')"><img srcset="https://media.istockphoto.com/id/1314393435/es/vector/piloto-de-atv-icono-glifo-vectorial-plano-quad.jpg?s=612x612&w=0&k=20&c=mJaTmPLmUUCnG9LvHSbp7mnz8U9kMMPcvlJ_EaAfnLs= 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/> Mostrar Terrestres</button>
-            <button type="button" class="BET btn btn-info" onclick="filterByAerial('{{chicken.catg}}')"><img srcset="https://media.istockphoto.com/id/1357597454/es/vector/parapente-dos-personas-con-paraca%C3%ADdas-silueta-eps.jpg?s=612x612&w=0&k=20&c=Ks-eLVr0ykfkLe1DgM1yBjwOoPriq2RjPPg9fbvHFuY= 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/> Mostrar Aereos</button>
-            <button type="button" class="BET btn btn-info" onclick="filterByAqua('{{chicken.catg}}')"><img srcset="https://st4.depositphotos.com/2517275/29911/v/450/depositphotos_299115886-stock-illustration-front-view-of-a-boat.jpg 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/> Mostrar Acuaticos</button>
+            <button type="button" class=" BET btn btn-info" onclick="filterByTerrestrial('{{chicken.catg}}')"><img srcset="https://media.istockphoto.com/id/1314393435/es/vector/piloto-de-atv-icono-glifo-vectorial-plano-quad.jpg?s=612x612&w=0&k=20&c=mJaTmPLmUUCnG9LvHSbp7mnz8U9kMMPcvlJ_EaAfnLs= 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/><b> Mostrar Terrestres</b></button>
+            <button type="button" class="BET btn btn-info" onclick="filterByAerial('{{chicken.catg}}')"><img srcset="https://media.istockphoto.com/id/1357597454/es/vector/parapente-dos-personas-con-paraca%C3%ADdas-silueta-eps.jpg?s=612x612&w=0&k=20&c=Ks-eLVr0ykfkLe1DgM1yBjwOoPriq2RjPPg9fbvHFuY= 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/><b> Mostrar Aereos</b></button>
+            <button type="button" class="BET btn btn-info" onclick="filterByAqua('{{chicken.catg}}')"><img srcset="https://st4.depositphotos.com/2517275/29911/v/450/depositphotos_299115886-stock-illustration-front-view-of-a-boat.jpg 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/><b> Mostrar Acuaticos</b></button>
         </div>
       </div>
       
@@ -595,7 +620,9 @@ function filterByAqua() {
                   <br>
                   
                 <!-- ... (Contenido existente de tus actividades extremas) ... -->
-                <h4 class="pt-4 " id="chick{{chicken.id}}">  {{chicken.name}}</h4><div class="rating">
+               <br>
+             <img class="picture  rounded" src="{{chicken.pImage}}" style="width:400px" height="400px">
+             <div class="texts">  <h4 class=" " style="font-size: 1rem;" id="chick{{chicken.id}}">  <b>{{chicken.name}}</b> <div class="rating">
                     
                     <!-- Utiliza íconos de estrellas vacías para representar las estrellas de calificación -->
                     {% if chicken.rating == 1 %}
@@ -609,31 +636,32 @@ function filterByAqua() {
             {% elif chicken.rating == 5 %}
                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
             {% endif %}
-                </div><br>
-             <img class="picture  rounded" src="{{chicken.pImage}}" style="width:400px" height="400px">
-             <br><br> <img srcset="https://w7.pngwing.com/pngs/403/272/png-transparent-earth-globe-computer-icons-earth-globe-monochrome-world-thumbnail.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/> <span class="CATGG">{{chicken.estd}}</span><br><br>
-          <H4>Paquete:</H4>
+                </div></h4>
+              
+             </div>
+             <br> <img srcset="https://w7.pngwing.com/pngs/403/272/png-transparent-earth-globe-computer-icons-earth-globe-monochrome-world-thumbnail.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/> <span class="CATGG"><b>{{chicken.estd}}</b></span><br><br>
+          <H4><b>Paquete:</b></H4>
          
           <div class = " form-check-inline">
             <label class="form-check-labelL">
               <input class="mp form-check-input" name = "chicken{{chicken.id}}" value=" {{chicken.priceM}}" type="radio" >
-               Economico : $ {{chicken.priceM}} 
+               Economico : $ {{chicken.priceM}} MXN
             </label>
           </div>
 
           <div class = " form-check-inline">
             <label class="form-check-labelM">
               <input class="lp form-check-input" name = "chicken{{chicken.id}}" value=" {{chicken.priceL}}" type="radio" >
-              Premium : $ {{chicken.priceL}} 
+              Premium : $ {{chicken.priceL}} MXN
             </label>
           </div>
           <button class="btn-info mt-4" onclick="addToWishlist('{{ chicken.id }}', '{{ chicken.name }}')">
             <img src="https://cdn-icons-png.freepik.com/512/1077/1077035.png" alt="heart" style="width: 20px; height: 20px;">
-            AÑADIR A WISHLIST
+            <b>AÑADIR A WISHLIST</b>
         </button><br>
         <form action="{% url 'food:agregar_al_carrito' chicken.id %}" method="post">
           {% csrf_token %}
-          <button class="btn-info mt-4"type="submit" onclick=showConfirmationModal();><img src="https://www.bogotraveltours.com/wp-content/uploads/2016/10/icono-encuentro.png" alt="heart" style="width: 20px; height: 20px;"> Agregar al carrito</button>
+          <button class="btn-info mt-4"type="submit" onclick=showConfirmationModal();><img src="https://www.bogotraveltours.com/wp-content/uploads/2016/10/icono-encuentro.png" alt="heart" style="width: 20px; height: 20px;"><b> Agregar al carrito</b></button>
       </form>
         
           <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
@@ -680,7 +708,7 @@ function filterByAqua() {
 
 
        
-         <br>
+         
          <script>
           function redirectToDetails(chickenId) {
               // Cambia la URL según la estructura de tus URLs de detalles
@@ -696,7 +724,7 @@ function filterByAqua() {
               </div>
               
             {% endfor %}<div class="pagination">
-              <span class="step-links">
+              <span class="step-links"><b>
                   {% if chickens.has_previous %}
                       <a href="?page=1">&laquo; first</a>
                       <a href="?page={{ chickens.previous_page_number }}">previous</a>
@@ -710,23 +738,28 @@ function filterByAqua() {
                       <a href="?page={{ chickens.next_page_number }}">next</a>
                       <a href="?page={{ chickens.paginator.num_pages }}">last &raquo;</a>
                   {% endif %}
-              </span>
+                </b></span>
           </div>
             
           </div>
           
         </div>
-        
-        <div class="col-md-4 carr"><div class="bg-light CARRT">
+       
+        <div class="col-md-4 carr"><div class="col-md-6 p-4 card"><div class=" CARRT">
           
-
-          <h3><img srcset="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJfOfyBce9Ctn7Ki0qOfrcEoqtV5FAHw90ETAJZta5EA&s 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/> Lista de Deseos</h3>
+ 
+          <h3><img srcset="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJfOfyBce9Ctn7Ki0qOfrcEoqtV5FAHw90ETAJZta5EA&s 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/><b> Lista de Deseos</b></h3>
           <ul id="wishlist"></ul>
       </div>
-          <div class="bg-light CARRT">
+    </div>
+    <div>
+      <div class="col-md-6 p-4 card">
+          <div class=" CARRT" style="font-family: arial;">
            
-            <h3><img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/> Carrito de compras</h3>
-             <div class="custom-div">
+            <h3><img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/><b> Carrito de compras</b><button class="btn-info mt-4" onclick="toggleContent()">Mostrar</button></h3>
+            <div id="content" style="display: none;">
+            
+            <div class="custom-div">
             <B>SE APLICARÁ UN CASHBACK DE PUNTOS POR VIAJE<B>
           </div>
           
@@ -734,29 +767,85 @@ function filterByAqua() {
             {% if items_carrito %}
                 {% for item in items_carrito %}
                     {% if item.pollo.name == "TOUR POR LOS CABOS" or item.pollo.name == "TOUR POR CDMX" or item.pollo.name == "TOUR POR LA PAZ" or item.pollo.name == "TOUR POR TULUM" %}
-                        <li style="background-color: #d4edda;">TOUR: {{ item.pollo.name }} <BR>- Cantidad: {{ item.cantidad }} <a STYLE="COLOR:WHITE; BACKGROUND-COLOR:DARKRED;" href="{% url 'food:eliminar_del_carrito' item.id %}">X</a></li>
+                        <li style="background-color: #d4edda;">TOUR: {{ item.pollo.name }} <BR>- Cantidad: {{ item.cantidad }} <a STYLE="COLOR:WHITE; BACKGROUND-COLOR:DARKRED;" href="{% url 'food:eliminar_del_carrito' item.id %}">          X</a></li>
                     {% else %}
-                        <li style="background-color: beige;">ACTIVIDAD: {{ item.pollo.name }} <BR>- Cantidad: {{ item.cantidad }} <a STYLE="COLOR:WHITE; BACKGROUND-COLOR:DARKRED;" href="{% url 'food:eliminar_del_carrito' item.id %}">X</a></li>
+                        <li style="background-color: beige;">ACTIVIDAD: {{ item.pollo.name }} <BR>- Cantidad: {{ item.cantidad }} <a STYLE="COLOR:WHITE; BACKGROUND-COLOR:DARKRED;" href="{% url 'food:eliminar_del_carrito' item.id %}">       X</a></li>
                     {% endif %}
                 {% endfor %}
-                <a class="ar" href="{% url 'food:ver_carrito_y_pagar' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">Checkout</a>
+                <BUTTON class="btn-info mt-4"><a class="" STYLE="color:white;" href="{% url 'food:ver_carrito_y_pagar' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
+                  <img srcset="https://cdn-icons-png.flaticon.com/512/3394/3394009.png 2x" alt="icon" loading="lazy" style="width: 50px; height: 50px;"/></a></BUTTON>
             {% else %}
                 <p>No hay productos en el carrito.</p>
             {% endif %}
         </ul>
+      </div>
           </div>
-
-          
-        
-    <a href="{% url 'food:chicken' %}">Volver a la lista de productos</a>
+        </div>
+        <script>
+        function toggleContent() {
+          var content = document.getElementById("content");
+          if (content.style.display === "none") {
+            content.style.display = "block";
+          } else {
+            content.style.display = "none";
+          }
+        }
+      </script>
+    
         </div>
       </div>
     </div>
     
 </div>
-</div>
+</div><br><br>
+<div class="errr" style="background-color: rgba(0, 0, 0, 0.57); padding: 20px; color:#0fd28a; font-weight:bold; "><h4 style="font-weight:bold;">ACTIVIDADES EN LAS MEJORES ZONAS EN MÉXICO<h4> </div><br><br>
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" width="400px" style="width:1500px; height:500px;">
+  <ol class="carousel-indicators">
+    <center>
+    {% for i in images %}
+    <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></li>
+    {% endfor %}
+  </ol>
+  <div class="carousel-inner">
+    {% for chicken in chickens %}
+    {% if forloop.counter0|divisibleby:4 %} <!-- Comprueba si el índice es divisible por 4 -->
+    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+      <div class="row">
+        {% endif %}
+        <div class="col-md-3">
+          <h5><b>{{ chicken.name }} en {{chicken.estd}}</b></h5>
+        
+          <img class="d-block w-100 img-fluid rounded" src="{{ chicken.pImage }}" alt="{{ chicken.name }}" style="width:100%" height="300px">
+          
+          <div class="carousel-caption d-none d-md-block" >
+        
+        
+           <button style="background-color: #00000063;" class="btn-info mt-4" onclick="redirectToDetails('{{ chicken.id }}')">Ver Detalles</button>
+          </div>
+          <script>
+            function redirectToDetails(chickenId) {
+              window.location.href = "{% url 'food:details' 0 %}".replace("0", chickenId);
+            }
+          </script>
+          
+        </div>
+        {% if forloop.last or forloop.counter0|add:1|divisibleby:4 %} <!-- Comprueba si es la última iteración o si el siguiente índice sería divisible por 4 -->
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
 
-    <h2>{{ msg }}</h2>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" style="background-color: black;" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" style="background-color: black;" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+  
   </center>
  <footer class="bg-dark text-white p-4">
     <div class="container">

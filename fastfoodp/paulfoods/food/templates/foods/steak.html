@@ -26,7 +26,8 @@
     text-align: center; /* Alineación del texto al centro */
 }
   .card {
-    border: 2px solid black; /* Agrega un borde negro de 2px a todas las cards */
+    border: 2px solid #b5b3b3;
+  display: inline-table;
 }
     
   body {
@@ -42,14 +43,14 @@
 
     body {
       
-        font-family: "Lucida Console", "Courier New", monospace;
+      font-family: "Centra No2", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
     a{
-      color: #e9d086;
+      color: #0e8056;
     }
   
   .navbar-light .navbar-nav .nav-link {
-    color: rgb(189, 172, 103);
+    color: #0e8056;
   }
     .form-inline .btn-success {
         background-color: #28a745;
@@ -58,9 +59,32 @@
     }
     .btn-info {
       color: #fff;
-      background-color: #e9d086;
-      border-color: #908a31;
+       background-color: #0fd28a;
+      border-color: #80ae90;
+      margin: 5px;
+padding:10px;
+-webkit-border-radius: 50px;
+-moz-border-radius: 50px;
+border-radius: 50px;
+font-size:18px;
+line-height:32px;
+
+
     }
+    .pe {
+      color: #13db92;
+      margin-top: 10px;
+      font-size: 1.6em;
+      padding: 25px;
+      background-color: rgba(0, 0, 0, 0.57);
+    }
+    .card {
+      background-color: #fff; /* Set a light background color */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px; /* Optional: Add rounded corners */
+  }
     .form-inline .btn-success:hover {
         background-color: #218838; /* Color de resaltado al pasar el ratón */
         border-color: #1e7e34;
@@ -127,15 +151,15 @@
         margin-bottom: 20px;
     }
     .BET{
-      border: 2px solid #908a31;; /* Borde amarillo */
+      border: 2px solid #00aa6c; /* Borde amarillo */
 background-color: transparent; /* Fondo transparente */
 color: inherit; /* Hereda el color de texto del contenedor padre */
 padding: 10px 20px; /* Ajusta el relleno según sea necesario */
 cursor: pointer;
     }
     .BET:hover {
-      background-color: #e9d086; /* Cambia el fondo al pasar el ratón */
-      color: black; /* Cambia el color del texto al pasar el ratón */
+      background-color: #00aa6c; /* Cambia el fondo al pasar el ratón */
+      color: WHITE; /* Cambia el color del texto al pasar el ratón */
   }
     .card {
       background-color: #fff; /* Set a light background color */
@@ -162,7 +186,7 @@ cursor: pointer;
     }
 
     .carr {
-        font-family: "Lucida Console", "Courier New", monospace;
+        
     }
 
     .perr {
@@ -172,7 +196,7 @@ cursor: pointer;
     .cartc {
       background-color: #bfac46;
         color: black;
-        font-family: "Lucida Console", "Courier New", monospace;
+        
     }
     
     .banner {
@@ -197,7 +221,21 @@ cursor: pointer;
       justify-content: center;
       background-color:#f8f9fa;
   }
-  
+  .fas {
+    font-weight: bold;
+    color: #ffe300;
+    border-color: black;
+  }
+  .texts {
+    position: absolute;
+top: 40%;
+left: 50%;
+transform: translate(-50%, -50%);
+background-color: rgba(76, 70, 70, 0.7);
+padding: 10px;
+border-radius: 5px;
+color: white;
+  }
     
   
 
@@ -224,13 +262,13 @@ cursor: pointer;
           </li>
           <li class="nav-item">
             <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:chicken' %}">DEPORTES EXTREMOS</a>
+          </li><li class="nav-item">
+            <a class="nav-link" href="{% url 'food:steak' %}">TOURS</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'food:burger' %}">MAPA</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'food:steak' %}">TOURS</a>
-          </li>
+          
           <li class="nav-item">
             <a class="nav-link" href="{% url 'food:drink' %}">UBICACIONES</a>
           </li>
@@ -310,53 +348,108 @@ cursor: pointer;
               addchicken();
           });
       </script>
+      <script>
+        // Arreglo para almacenar las actividades en la lista de deseos
+        var wishlist = [];
+  
+        // Función para agregar actividad a la lista de deseos
         
+  
+        // Función para actualizar la lista de deseos en la pantalla
+        function updateWishlist() {
+            // Obtener el elemento donde mostraremos la lista de deseos
+            var wishlistElement = document.getElementById("wishlist");
+  
+            // Limpiar el contenido anterior de la lista de deseos
+            wishlistElement.innerHTML = "";
+  
+            // Recorrer el arreglo de lista de deseos y agregar cada actividad como un elemento de lista
+            wishlist.forEach(function(activity) {
+                var listItem = document.createElement("li");
+                listItem.textContent = activity;
+                wishlistElement.appendChild(listItem);
+            });
+        }
+        function addToWishlist(chickenId, name) {
+          wishlist.push(name);
+          localStorage.setItem('wishlist', JSON.stringify(wishlist));
+          updateWishlist();
+          $('#confirmationModal1').modal('show');
+      }
+      
+      // Función para cargar la wishlist desde el localStorage al cargar la página
+      function loadWishlist() {
+          var savedWishlist = localStorage.getItem('wishlist');
+          if (savedWishlist) {
+              wishlist = JSON.parse(savedWishlist);
+              updateWishlist();
+          }
+      }
+      loadWishlist();
+    </script>
+      
+      <script>
+        function showConfirmationModal() {
+            $('#confirmationModal').modal('show');
+        }
+    </script>
         
    <h1></h1>
-   <CENTER>
+   <BR>
+   <CENTER><p class="pe"><b>ESCOGE UN TOUR DE TODOS LAS POSIBLES OPCIONES</b></p>
     <div class="container-fluid perr" style="padding:100px">
       <div class="row text-center background-color-dark">
         <div class="col-md-8">
           <div class="row">
-            {% for chicken in chickens %}
-            {% if chicken.estd == "TOURT" or chicken.estd == "TOURC" or chicken.estd == "TOURP" or chicken.estd == "TOURX" %}
+            {% for chicken in chickens %} {% if chicken.estd == "TOURT" or chicken.estd == "TOURC" or chicken.estd == "TOURP" or chicken.estd == "TOURX" %}
               <div class="col-md-6 p-4 card">
                 <center>
                   <button class="category-value btn-info mt-4 rounded"><b>{{chicken.catg}}</b></button>
-                  <div class="rating">
-                    <!-- Utiliza íconos de estrellas vacías para representar las estrellas de calificación -->
-                    <i class="far fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
+                  <br>
+                  
                 <!-- ... (Contenido existente de tus actividades extremas) ... -->
-                <h4 class="pt-4 " id="chick{{chicken.id}}">  {{chicken.name}}</h4>
+               <br>
              <img class="picture  rounded" src="{{chicken.pImage}}" style="width:400px" height="400px">
-             <br><br> 
-          <H4>Paquete:</H4>
+             <div class="texts">  <h4 class=" " style="font-size: 1rem;" id="chick{{chicken.id}}">  <b>{{chicken.name}}</b> <div class="rating">
+                    
+                    <!-- Utiliza íconos de estrellas vacías para representar las estrellas de calificación -->
+                    {% if chicken.rating == 1 %}
+                <i class="fas fa-star"></i>
+            {% elif chicken.rating == 2 %}
+                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            {% elif chicken.rating == 3 %}
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            {% elif chicken.rating == 4 %}
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            {% elif chicken.rating == 5 %}
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            {% endif %}
+                </div></h4>
+              
+             </div>
+             
+          <H4><b>Paquete:</b></H4>
          
           <div class = " form-check-inline">
             <label class="form-check-labelL">
               <input class="mp form-check-input" name = "chicken{{chicken.id}}" value=" {{chicken.priceM}}" type="radio" >
-               Economico : $ {{chicken.priceM}} 
+               Economico : $ {{chicken.priceM}} MXN
             </label>
           </div>
 
           <div class = " form-check-inline">
             <label class="form-check-labelM">
               <input class="lp form-check-input" name = "chicken{{chicken.id}}" value=" {{chicken.priceL}}" type="radio" >
-              Premium : $ {{chicken.priceL}} 
+              Premium : $ {{chicken.priceL}} MXN
             </label>
           </div>
           <button class="btn-info mt-4" onclick="addToWishlist('{{ chicken.id }}', '{{ chicken.name }}')">
             <img src="https://cdn-icons-png.freepik.com/512/1077/1077035.png" alt="heart" style="width: 20px; height: 20px;">
-            AÑADIR A WISHLIST
+            <b>AÑADIR A WISHLIST</b>
         </button><br>
         <form action="{% url 'food:agregar_al_carrito' chicken.id %}" method="post">
           {% csrf_token %}
-          <button class="btn-info mt-4"type="submit" onclick=showConfirmationModal();><img src="https://www.bogotraveltours.com/wp-content/uploads/2016/10/icono-encuentro.png" alt="heart" style="width: 20px; height: 20px;"> Agregar al carrito</button>
+          <button class="btn-info mt-4"type="submit" onclick=showConfirmationModal();><img src="https://www.bogotraveltours.com/wp-content/uploads/2016/10/icono-encuentro.png" alt="heart" style="width: 20px; height: 20px;"><b> Agregar al carrito</b></button>
       </form>
         
           <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
@@ -456,14 +549,15 @@ cursor: pointer;
 
         
 
-        <div class="col-md-4 carr"><div class="bg-light CARRT">
+        <div class="col-md-4 carr"><div class="col-md-6 p-4 card"><div class=" CARRT"><div class="bg- CARRT">
           
 
-          <h3><img srcset="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJfOfyBce9Ctn7Ki0qOfrcEoqtV5FAHw90ETAJZta5EA&s 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/> Lista de Deseos</h3>
-          <ul id="wishlist"></ul>
-      </div>
-          <div class="bg-light CARRT">
-            <h3><img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/> Carrito de compras</h3>
+          <h3><img srcset="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJfOfyBce9Ctn7Ki0qOfrcEoqtV5FAHw90ETAJZta5EA&s 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px;"/> <b>Lista de Deseos</b></h3>
+          <ul id="wishlist"></ul></div>
+      </div></div>
+      <div class="col-md-6 p-4 card"><div class=" CARRT">
+          <div class="bg- CARRT">
+            <h3><img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/><B> Carrito de compras</b></h3>
             <div class="custom-div">
               <B>SE APLICARÁ UN CASHBACK DE PUNTOS POR VIAJE<B>
             </div>
@@ -476,17 +570,18 @@ cursor: pointer;
                           <li style="background-color: beige;">ACTIVIDAD: {{ item.pollo.name }} <BR>- Cantidad: {{ item.cantidad }} <a STYLE="COLOR:WHITE; BACKGROUND-COLOR:DARKRED;" href="{% url 'food:eliminar_del_carrito' item.id %}">X</a></li>
                       {% endif %}
                   {% endfor %}
-                  <a class="ar" href="{% url 'food:ver_carrito_y_pagar' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">Checkout</a>
+                  <BUTTON class="btn-info mt-4"><a class="" STYLE="color:white;" href="{% url 'food:ver_carrito_y_pagar' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
+                    <img srcset="https://cdn-icons-png.flaticon.com/512/3394/3394009.png 2x" alt="icon" loading="lazy" style="width: 50px; height: 50px;"/></a></BUTTON>
               {% else %}
                   <p>No hay productos en el carrito.</p>
               {% endif %}
           </ul>
           
           </div>
-
+        </div>
           
         
-    <a href="{% url 'food:chicken' %}">Volver a la lista de productos</a>
+   
         </div>
       </div>
     </div>

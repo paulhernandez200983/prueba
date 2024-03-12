@@ -17,7 +17,45 @@
 <link rel="icon" href="https://www.flaticon.es/svg/vstatic/svg/3916/3916657.svg?token=exp=1662854069~hmac=136bd71682904cb823525cd8938961b9">
 {% load static %}
 <style>
+  .payment-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .paypal-button, .card-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .paypal-button img, .card-button img {
+    width: 150px;
+    height: auto;
+  }
+  
+  .table {
+    background-color: #fff; /* Cambiar color de fondo de la tabla */
+}
 
+.table th,
+.table td {
+    border: 1px solid #ddd; /* Añadir bordes a las celdas */
+}
+
+.table th {
+  background-color: #4abb96;
+  color: #fff;
+  text-align: center;
+  text-decoration: cadetblue;
+}
+
+/* Estilos para los botones */
+
+.paypal-button img {
+    max-width: 150px; /* Ajustar el tamaño de la imagen de PayPal */
+}
   body {
     background-image: url('https://img.freepik.com/foto-gratis/concreto-texturado-blanco_125540-1826.jpg?w=996&t=st=1708584169~exp=1708584769~hmac=6802f37a96b71f7b953580787dab6c7cf1f21b681cf0d8a35082798e77006d33');
     background-size: cover;
@@ -32,17 +70,20 @@
 }
     body {
       
-        font-family: "Lucida Console", "Courier New", monospace;
+      font-family: "Centra No2", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
     a{
-      color: #e9d086;
+      color: #0e8056;
     }
     .bg-dark {
       background-color: #697276;
     }
   .navbar-light .navbar-nav .nav-link {
-    color: rgb(189, 172, 103);
+    color:#0e8056;
   }
+  
+
+
     .form-inline .btn-success {
         background-color: #28a745;
         border-color: #28a745;
@@ -50,8 +91,17 @@
     }
     .btn-info {
       color: #fff;
-      background-color: #e9d086;
-      border-color: #908a31;
+       background-color: #0fd28a;
+      border-color: #80ae90;
+      margin: 5px;
+padding:10px;
+-webkit-border-radius: 50px;
+-moz-border-radius: 50px;
+border-radius: 50px;
+font-size:18px;
+line-height:32px;
+
+
     }
     .form-inline .btn-success:hover {
         background-color: #218838; /* Color de resaltado al pasar el ratón */
@@ -98,6 +148,7 @@
     * {
         margin: 0;
         box-sizing: border-box;
+        height: fit-content;
     }
 
     .navbar-text {
@@ -118,17 +169,21 @@
     .form-inline {
         margin-bottom: 20px;
     }
+   
     .BET{
-      border: 2px solid #908a31;; /* Borde amarillo */
+      border: 3px solid #00aa6c; /* Borde amarillo */
 background-color: transparent; /* Fondo transparente */
 color: inherit; /* Hereda el color de texto del contenedor padre */
 padding: 10px 20px; /* Ajusta el relleno según sea necesario */
 cursor: pointer;
+COLOR: #00aa6c;
+width: max-content;
     }
     .BET:hover {
-      background-color: #e9d086; /* Cambia el fondo al pasar el ratón */
-      color: black; /* Cambia el color del texto al pasar el ratón */
+      background-color: #00aa6c; /* Cambia el fondo al pasar el ratón */
+      color: WHITE; /* Cambia el color del texto al pasar el ratón */
   }
+
     .card {
       background-color: #fff; /* Set a light background color */
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
@@ -179,11 +234,7 @@ cursor: pointer;
       align-items: center;
       justify-content: center;
   }
-  .btn-info {
-    color: #fff;
-    background-color: #e9d086;
-    border-color: #908a31;
-  }
+  
   .banner-content {
       z-index: 1;
   }
@@ -267,8 +318,8 @@ cursor: pointer;
       </div>
     </nav>
   </div><center>
-    <div class="container-fluid m-4">
-      <table class="table table-bordered"style="background-color:lightgray;"> 
+    <div class="container-fluid m-4" style="display:flex;">
+      <table class="table table-bordered"> 
           <thead>
               <tr>
                   <th>Producto</th>
@@ -290,35 +341,25 @@ cursor: pointer;
               {% endfor %}
           </tbody>
       </table>
-      <p>Total a Pagar: ${{ total_carrito }}</p>
-  </div>
-  
-  
-     <div class="ml-auto m-4">
+       <div class="ml-auto m-5 rounded" style="background-color:white;border: 2px solid black; width: fit-content; padding:5px;height: fit-content;">
       {% if user.is_authenticated %}
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-        <input type="hidden" name="cmd" value="_s-xclick" />
-        <input type="hidden" name="hosted_button_id" value="35JB4TY7PD748" />
-        <input type="hidden" name="currency_code" value="USD" />
-        <input type="image" src="https://www.paypalobjects.com/es_XC/MX/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" title="PayPal es una forma segura y fácil de pagar en línea." alt="Comprar ahora" />
-      </form>
-      <h1>Realizar Pago con PayPal</h1>
-      <form action="{% url 'food:payment_processp' %}" method="post">
-          {% csrf_token %}
-          <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-medium.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-      </form>
+      <p><b>Total a Pagar: ${{ total_carrito }}</b></p>
+      <h4>Realizar Pago con:</h4>
+      
 
-      <form action="{% url 'food:ver_carrito_y_pagarp' %}" method="post">
+      <form action="{% url 'food:paymen' %}" method="post">
         {% csrf_token %}
         <button type="submit" class="paypal-button">
           <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_150x38.png" alt="Pagar con PayPal">
         </button>
       </form>
       
-    {{paypal.render}}
+    
      
-      <div class="container-fluid m-4">
-        <button type="submit" class="btn-success" onclick="redirectToDetails()" >Proceder a pagar</button>
+      <div class="container-fluid ">
+        <center>
+          <h4>o </h4>
+        <button type="submit" class="BET btn btn-info" onclick="redirectToDetails()" ><b>Pagar con tarjeta<b></button>
   </div>
   
   <script>
@@ -344,7 +385,12 @@ CREA UNA CUENTA
 {% endif %}
 </div>
      </div>
-     
+  </div>
+  
+  
+    
+    
+    
     <h2>{{msg}}</h2></center>
     <!-- jQuery library -->
     <footer class="bg-dark text-white p-4">

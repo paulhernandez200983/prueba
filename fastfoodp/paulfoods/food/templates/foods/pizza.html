@@ -14,10 +14,10 @@
         {% load static %}
         <style>
           .profile-image {
-            width: 150px; /* Ancho de la imagen de perfil */
-            height: 150px; /* Altura de la imagen de perfil */
+            width: 300px; /* Ancho de la imagen de perfil */
+            height: 300px; /* Altura de la imagen de perfil */
             border-radius: 50%; /* Redondea las esquinas para hacer una imagen circular */
-            border: 4px solid #ffffff; /* Agrega un borde blanco a la imagen de perfil */
+            border: 4px solid  #0e8056; /* Agrega un borde blanco a la imagen de perfil */
             margin-bottom: 20px; /* Agrega un espacio entre la imagen de perfil y otros elementos */
         }
           
@@ -26,7 +26,7 @@
       }
         
           .navbar-light .navbar-nav .nav-link {
-            color: rgb(189, 172, 103);
+            color: #0e8056;
           }
       body {
         background-image: url('https://img.freepik.com/foto-gratis/concreto-texturado-blanco_125540-1826.jpg?w=996&t=st=1708584169~exp=1708584769~hmac=6802f37a96b71f7b953580787dab6c7cf1f21b681cf0d8a35082798e77006d33');
@@ -35,7 +35,8 @@
         background-attachment: fixed;
     }
       body {
-        font-family: "Lucida Console", "Courier New", monospace;
+        font-family: "Centra No2", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    
         }
   
       .form-inline .btn-success {
@@ -46,8 +47,17 @@
      
       .btn-info {
         color: #fff;
-        background-color: #e9d086;
-        border-color: #908a31;
+         background-color: #0fd28a;
+        border-color: #80ae90;
+        margin: 5px;
+  padding:10px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  font-size:18px;
+  line-height:32px;
+  
+  
       }
       .form-inline .btn-success:hover {
           background-color: #218838; /* Color de resaltado al pasar el ratón */
@@ -128,7 +138,9 @@
       .card {
           background-color: white;
           margin-bottom: 20px;
-          font-family: "Lucida Console", "Courier New", monospace;
+          
+          border: 2px solid #b5b3b3;
+          display: inline-table;
       }
   
       .picture {
@@ -155,7 +167,9 @@
           color: black;
           font-family: "Lucida Console", "Courier New", monospace;
       }
-        
+        a{
+          color: #0e8056;
+        }
     
         </style>
         </head>
@@ -175,7 +189,9 @@
               <li class="nav-item">
                 <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:chicken' %}">DEPORTES EXTREMOS</a>
               </li>
-              
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'food:steak' %}">TOURS</a>
+              </li>
               {%else%}
               <li class="nav-item">
                 <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:login' %}">LOGGEATE PARA VER LOS VIAJES</a>
@@ -184,9 +200,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'food:burger' %}">MAPA</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'food:steak' %}">TOURS</a>
-              </li>
+              
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'food:drink' %}">UBICACIONES</a>
               </li>
@@ -235,38 +249,52 @@
             {% block content %}
             <br><br><br>
             <div class="col-md-6 p-4 card" style="color:black">
-  <h1>PERFIL DEL USUARIO</h1>
+  <h1 style="color:#0fd28a;"><B>PERFIL DEL USUARIO</b></h1><br>
   
 
     {% if user.is_authenticated %}
-    <center>
-      <img class="profile-image" src="{{ user.profile_image_url }}" alt="SIN IMAGEN DE PERFIL"><BR>
-                <!-- Datos del usuario -->
-                <div class="user-data">
-                    <p><strong>Bienvenido {{ user.username }}</strong></p><br>
-                    <p><strong>Nombre:</strong> {{ user.first_name }} {{ user.last_name }}</p><br>
-                    <p><strong>Email:</strong> {{ user.email }}</p><br>
-                    <p><strong>Teléfono: </strong> {{ user.phone_number }}</p><br>
-                    <p><strong>Direcion: </strong> {{ user.direccion }}</p><br>
-                    <p><img class="bg-light rounded" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/2560px-Flag_of_Mexico.svg.png" alt="" style="width:60px;"/><strong> Estado: </strong>{{ user.estado }}</p><br>
-                    <p><strong>Cuenta creada el:</strong> {{ user.date_joined }}</p>
-              
-                </div>
-          {%else%}
-          <li class="nav-item">
-            <a href="{% url 'food:login' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
-                <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
-                Inicia sesion para ver tu perfil
-            </a>
-          </li> <li class="nav-item">
-            <a href="{% url 'food:signup' %}" class="nav-link {% if active_link == 'signup' %}active {% endif %}">
-                <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
-                Crea una cuenta nueva y unete
-            </a>
-          </li>
-    
-    {% endif %}
+    <center><br><br><div style="display: flex;">
+      <!-- Imagen de usuario -->
+      <div style="flex: 2;">
+          <img class="profile-image" src="{{ user.profile_image_url }}" alt="SIN IMAGEN DE PERFIL"><br>
+      </div>
+      <!-- Datos del usuario -->
+      <div style="flex: 2; padding-left: 20px; text-align: right;">
+          <p><strong>Bienvenido {{ user.username }}</strong></p><br>
+          <p><strong>Nombre:</strong> {{ user.first_name }} {{ user.last_name }}</p><br>
+          <p><strong>Email:</strong> {{ user.email }}</p><br>
+          <p><strong>Teléfono:</strong> {{ user.phone_number }}</p><br>
+          <p><strong>Dirección:</strong> {{ user.direccion }}</p><br>
+          <p><img class="bg-light rounded" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/2560px-Flag_of_Mexico.svg.png" alt="" style="width:60px;"><strong> Estado:</strong> {{ user.estado }}</p><br>
+          <p><strong>Cuenta creada el:</strong> {{ user.date_joined }}</p>
+      </div>
   </div>
+  {% else %}
+  <!-- Mensaje para usuarios no autenticados -->
+  <li class="nav-item">
+      <a href="{% url 'food:login' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
+          <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+          Inicia sesión para ver tu perfil
+      </a>
+  </li>
+  <li class="nav-item">
+      <a href="{% url 'food:signup' %}" class="nav-link {% if active_link == 'signup' %}active {% endif %}">
+          <img class="bg-light rounded-circle" srcset="https://img.icons8.com/external-bearicons-glyph-bearicons/344/external-log-in-call-to-action-bearicons-glyph-bearicons-1.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(102deg) brightness(99%) contrast(104%);"/>
+          Crea una cuenta nueva y únete
+      </a>
+  </li>
+  {% endif %}
+  <br><br><br><br>
+  <h2><b>User Orders</b></h2>
+  <ul>
+      {% for order in user_orders %}
+          Order ID: {{ order.id }}, Total Amount: {{ order.total_amount }}
+          <!-- Aquí puedes agregar más detalles de la orden si lo deseas -->
+      {% empty %}
+          No orders found.
+      {% endfor %}
+  </ul>
+</div>
 {% endblock %}
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     

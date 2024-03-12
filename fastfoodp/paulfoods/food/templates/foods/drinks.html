@@ -31,16 +31,17 @@
 }
     body {
       
-        font-family: "Lucida Console", "Courier New", monospace;
+        
+      font-family: "Centra No2", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
     a{
-      color: #e9d086;
+      color: #0e8056;
     }
     .bg-dark {
       background-color: #697276;
     }
   .navbar-light .navbar-nav .nav-link {
-    color: rgb(189, 172, 103);
+    color: #0e8056;
   }
     .form-inline .btn-success {
         background-color: #28a745;
@@ -198,12 +199,13 @@ cursor: pointer;
   }
 
   .destination-info {
-    border: 2px solid #ccc; /* Borde gris de 2px */
+    border: 2px solid #b5b3b3;  /* Borde gris de 2px */
     padding: 20px; /* Espaciado interno */
     margin-bottom: 20px; /* Margen inferior */
     text-align: center; /* Alineación del texto al centro */
     max-width: 800px; /* Ancho máximo del div */
     margin: 20px auto; /* Margen para centrar */
+    font-weight:bold;
 }
 .destination-info img {
     max-width: 100%; /* Imagen ajustada al tamaño del div */
@@ -211,8 +213,10 @@ cursor: pointer;
     margin-bottom: 10px; /* Margen inferior */
 }
 .destination-info a {
-    color: blue; /* Color del enlace */
+  color: #0e8056; /* Color del enlace */
     text-decoration: none; /* Sin subrayado */
+    font-weight:bold;
+    font-size:20px;
 }
 .destination-info a:hover {
     text-decoration: underline; /* Subrayado al pasar el ratón */
@@ -236,11 +240,11 @@ cursor: pointer;
       <li class="nav-item">
         <a class="nav-link {% if active_link == 'chicken' %} active{% endif %}" href="{% url 'food:chicken' %}">DEPORTES EXTREMOS</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'food:burger' %}">MAPA</a>
-      </li>
+     
       <li class="nav-item">
         <a class="nav-link" href="{% url 'food:steak' %}">TOURS</a>
+      </li> <li class="nav-item">
+        <a class="nav-link" href="{% url 'food:burger' %}">MAPA</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{% url 'food:drink' %}">UBICACIONES</a>
@@ -255,9 +259,9 @@ cursor: pointer;
         </li>
         {% endif %}
       <li class="nav-item">
-        <a href="{% url 'food:order' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
+        <a href="{% url 'food:ver_carrito_y_pagar' %}" class="nav-link {% if active_link == 'index' %}active {% endif %}">
             <img srcset="https://img.icons8.com/small/344/add-shopping-cart.png 2x" alt="icon" loading="lazy" style="width: 30px; height: 30px; filter: invert(0%) sepia(9%) saturate(7465%) hue-rotate(38deg) brightness(112%) contrast(97%);"/>
-            <span id="cart">0</span>
+           
         </a>
       </li>
       {% if user.is_authenticated %}
@@ -289,7 +293,7 @@ cursor: pointer;
 
   <div class="banner">
     
-    <p>   Descubre destinos emocionantes y vive aventuras inolvidables</p>
+    <p>  <b> Descubre destinos emocionantes y vive aventuras inolvidables</b></p>
 </div>
 
     <div class="destination-info">
